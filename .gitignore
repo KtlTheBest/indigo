@@ -1,4 +1,6 @@
+# IDE setup for development
 .vscode/
-sensitive.py
-test.py
+.DS_Store
+
+# All sensitive info like tokens, passwords, etc.
 .env
