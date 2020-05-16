@@ -26,6 +26,7 @@ def process_chat(chat):
   for field, require_loads in encrypted_fields.items():
     if field in chat:
       chat[field] = decrypt(chat[field])
+
       if require_loads:
         chat[field] = json.loads(chat[field])
   return chat
