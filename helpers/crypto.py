@@ -3,6 +3,8 @@ import json
 import os
 
 SECRET = os.environ['SECRET'].encode()
+print("python - crypto: {}".format(os.environ))
+print("{} {}".format(SECRET, os.environ['SECRET']))
 cipher_suite = Fernet(SECRET)
 
 def encrypt(content):

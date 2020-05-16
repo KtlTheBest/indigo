@@ -13,9 +13,6 @@ from helpers import time_helpers
 from scrapers import moodle_login, registrar_login, webwork_login
 from configs import bot_messages, bot_states
 
-from dotenv import load_dotenv
-load_dotenv()
-
 def log_text(debug_text):
   # TODO: Use logging module instead of print
 
@@ -407,8 +404,6 @@ def notifying_grades_process(bot):
   # TODO: Must refactor the code
 
   while True:
-    log_text('Starting to check for new grades.. {}'.format(grade_cycles))
-
     chat = api_calls.get_chat_info()
 
     if not 'notify_grades' in chat or chat['notify_grades'] == "false":
@@ -504,10 +499,8 @@ def main():
   notifying_lectures = threading.Thread(target=notifying_lectures_process, args=(updater.bot, ))
   notifying_webworks = threading.Thread(target=notifying_webworks_process, args=(updater.bot, ))
   notifying_grades = threading.Thread(target=notifying_grades_process, args=(updater.bot, ))
-  restarting_dynos = threading.Thread(target=restart_heroku_dynos)
 
-  # threads = [notifying_webworks, notifying_grades, restarting_dynos, notifying_lectures]
-  threads = [restarting_dynos]
+  threads = [notifying_webworks, notifying_grades, notifying_lectures]
   #threads = [restarting_dynos, notifying_lectures]
 
   for thread in threads:

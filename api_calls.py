@@ -4,9 +4,9 @@ from helpers import crypto
 
 from cryptography.fernet import Fernet
 
-CHAT_INFO_FILENAME = "chat_info.json"
+CHAT_INFO_FILENAME = "config/chat_info.json"
 
-chat_info_ojb = {}
+chat_info_obj = {}
 
 def save_chat_info():
   with open(CHAT_INFO_FILENAME, "w") as f:
@@ -39,6 +39,8 @@ def get_chat_info():
       chat_info = json.load(f)
 
   except FileNotFoundError:
+    if not os.path.exists("config"):
+      os.mkdir("config")
     save_chat_info()
 
   return crypto.process_chat(chat_info)
