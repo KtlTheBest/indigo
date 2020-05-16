@@ -2,9 +2,6 @@ from cryptography.fernet import Fernet
 import json
 import os
 
-from dotenv import load_dotenv
-load_dotenv()
-
 SECRET = os.environ['SECRET'].encode()
 cipher_suite = Fernet(SECRET)
 
