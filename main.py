@@ -6,6 +6,8 @@ import threading
 import time
 import api_calls
 
+# TODO: Use scheduling instead of sleep
+
 from bs4 import BeautifulSoup
 from telegram.ext import CommandHandler, MessageHandler, Filters, Updater, ConversationHandler, RegexHandler
 
@@ -106,7 +108,7 @@ def set_webwork_password(bot, update):
 def main_password_choice(bot, update):
   new_password = update.message.text
   update.message.reply_text(bot_messages.updated_password_response)
-  api_calls.update_main_password(update.message.chat_id, new_password)
+  api_calls.update_main_password(new_password)
 
   return ConversationHandler.END
 
